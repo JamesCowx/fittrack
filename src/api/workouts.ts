@@ -1,0 +1,4 @@
+﻿export interface Workout { id: string; type: 'running' | 'cycling' | 'swimming' | 'strength' | 'yoga'; duration: number; distance?: number; calories: number; heartRate: { avg: number; max: number; min: number }; date: string; exercises?: Exercise[]; notes?: string; }
+export interface Exercise { name: string; sets: number; reps: number; weight: number; }
+export function calculateCalories(type: string, duration: number, heartRate: number, weight: number): number { const met: Record<string, number> = { running: 9.8, cycling: 7.5, swimming: 8.0, strength: 5.0, yoga: 3.0 }; return Math.round((met[type] || 5) * 3.5 * weight / 200 * duration); }
+export function estimateVO2max(heartRateData: number[], age: number): number { const maxHR = Math.max(...heartRateData); const restingHR = Math.min(...heartRateData); return 15.3 * (maxHR / restingHR); }
